@@ -1,19 +1,13 @@
-doc/recursos_grafico/*.ai
-doc/recursos_grafico/*.pdf
 # Dependencias
 node_modules/
 
-# Respaldos
-doc/RESPALDO/
+# Documentación y respaldos
+doc/
 
 # Archivos de diseño pesados
 *.ai
-
-# Archivos comprimidos
-*.zip
-
-# PDFs pesados
 *.pdf
+*.zip
 
 # Variables de entorno
 .env
