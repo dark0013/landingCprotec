@@ -1,0 +1,5 @@
+import type { Service } from '../data/services'
+
+export function ServicePage({ service }: { service: Service }) {
+  return <main className={`service-page service-page--${service.accent}`} id="contenido"><section className="service-page__hero"><div className="shell service-page__grid"><div className="service-page__content"><a className="back-link" href="#/">← Volver a servicios</a><p className="eyebrow">CPROTEC · Producciones Digitales</p><h1>{service.title}</h1><p>{service.description}</p><a className="button button--primary" href="#contacto">Solicita información <span aria-hidden="true">→</span></a></div><div className="service-page__image"><img src={service.image} alt={service.imageAlt} /></div></div></section><section className="section service-page__detail"><div className="shell"><p className="eyebrow">Enfoque a tu medida</p><h2>Una solución que acompaña tus objetivos</h2><p>Combinamos creatividad, planificación y herramientas profesionales para construir una propuesta coherente con las necesidades de cada cliente.</p><a className="back-link back-link--dark" href="#/">Ver todos los servicios</a></div></section></main>
+}

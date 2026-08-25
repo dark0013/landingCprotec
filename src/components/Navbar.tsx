@@ -9,7 +9,7 @@ const navItems = [
   { label: 'Noticias', href: '#noticias' },
 ]
 
-export function Navbar() {
+export function Navbar({ variant = 'default' }: { variant?: 'default' | 'service' }) {
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
@@ -21,7 +21,7 @@ export function Navbar() {
   }, [])
 
   return (
-    <header className={`navbar ${scrolled ? 'navbar--scrolled' : ''}`}>
+    <header className={`navbar ${variant === 'service' ? 'navbar--service' : ''} ${scrolled ? 'navbar--scrolled' : ''}`}>
       <nav className="shell navbar__inner" aria-label="Navegación principal">
         <a className="navbar__brand" href="#inicio" onClick={() => setOpen(false)}><Brand /></a>
         <button className="menu-toggle" type="button" aria-expanded={open} aria-controls="main-menu" aria-label={open ? 'Cerrar menú' : 'Abrir menú'} onClick={() => setOpen(!open)}>

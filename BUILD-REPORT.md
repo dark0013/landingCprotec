@@ -33,6 +33,8 @@ React, React DOM, Vite, TypeScript, Tailwind CSS con `@tailwindcss/vite`, y ESLi
 ## 6. Funcionalidades implementadas
 
 - Navegación por anclas y CTA.
+- Tres páginas de servicio accesibles desde cada tarjeta: Diseño Gráfico Publicitario, Marketing y publicidad, y Servicios audiovisuales para eventos sociales.
+- Rutas estáticas compatibles con cPanel mediante hash: `#/servicios/diseno-grafico-publicitario`, `#/servicios/marketing-y-publicidad` y `#/servicios/servicios-audiovisuales`.
 - Menú móvil con `aria-expanded`, cierre al elegir un enlace y foco visible.
 - Hero y servicios responsive.
 - Botón de volver al inicio visible después de desplazarse.

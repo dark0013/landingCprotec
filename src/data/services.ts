@@ -1,4 +1,5 @@
 export type Service = {
+  slug: string
   title: string
   description: string
   image: string
@@ -8,6 +9,7 @@ export type Service = {
 
 export const services: Service[] = [
   {
+    slug: 'diseno-grafico-publicitario',
     title: 'Diseño Gráfico Publicitario',
     description: 'En CPROTEC te asesoraremos y guiaremos paso a paso desarrollando marcas con personalidad, conceptos creativos a la vanguardia del diseño y la funcionalidad, alineados a tus objetivos y propuesta para un rápido posicionamiento en el mercado.',
     image: '/assets/services/design.png',
@@ -15,6 +17,7 @@ export const services: Service[] = [
     accent: 'blue',
   },
   {
+    slug: 'marketing-y-publicidad',
     title: 'Marketing y publicidad',
     description: 'Con CPROTEC genera empatía y diseña campañas que destaquen tu marca y la hagan crecer, maximizando el retorno de tu inversión. Realizamos campañas personalizadas de marketing de acuerdo con las necesidades de cada cliente.',
     image: '/assets/services/marketing.png',
@@ -22,6 +25,7 @@ export const services: Service[] = [
     accent: 'red',
   },
   {
+    slug: 'servicios-audiovisuales',
     title: 'Servicios audiovisuales para eventos sociales',
     description: 'CPROTEC cuenta con un equipo capacitado para realizar todo tipo de trabajos y eventos audiovisuales. Además, trabajamos con equipos de última tecnología y marcas profesionales, brindando lo mejor de nosotros y estando atentos a las necesidades de nuestros clientes.',
     image: '/assets/services/audiovisual.png',
