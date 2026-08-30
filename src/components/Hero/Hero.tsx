@@ -1,29 +1,43 @@
-import { Brand } from '../Brand/Brand'
-import { homeLine } from '../../data/catalog'
+import { socialChannels } from '../../data/social'
 import styles from './Hero.module.css'
 
 export function Hero() {
   return (
-    <section className={styles.hero} id="inicio" data-accent={homeLine.accent} aria-labelledby="hero-title">
-      <div className={styles.background} aria-hidden="true" />
-      <div className={`shell ${styles.grid}`}>
+    <section className={styles.hero} id="inicio" aria-labelledby="hero-title">
+      <img className={styles.photo} src="/assets/hero.jpg" alt="Espacio de trabajo de diseño y tecnología de CPROTEC" fetchPriority="high" />
+      <div className={styles.veil} aria-hidden="true" />
+      <div className={`shell ${styles.inner}`}>
         <div>
-          <div className={styles.wordmark}>
-            <Brand variant="white" size="hero" />
-            <h1 id="hero-title">{homeLine.title}</h1>
-          </div>
-          <hr className={styles.divider} />
-          <p className={styles.lead}>{homeLine.description}</p>
-          <ul className={styles.services} aria-label="Servicios principales">
-            {homeLine.offerings.map((item) => <li key={item.slug}>{item.title}</li>)}
-          </ul>
-          <a className="button button--primary button--light" href="#servicios">Conoce más <span aria-hidden="true">→</span></a>
+          <h1 className={styles.title} id="hero-title">
+            <span>Bienvenido a</span>
+            <span>CPROTEC</span>
+          </h1>
+          <a className={styles.platform} href="#/plataforma">Accede a plataforma educativa</a>
         </div>
-        <div className={styles.visual}>
-          <div className={styles.frame}>
-            <img src={homeLine.heroImage} alt="Espacio de trabajo de producción y diseño digital" fetchPriority="high" />
-          </div>
-        </div>
+        <ul className={styles.actions} aria-label="Canales de CPROTEC">
+          {socialChannels.map((item) => {
+            const inner = (
+              <>
+                {item.id === 'chat' ? <span className={styles.chipLabel}>CHAT</span> : null}
+                <img src={item.icon} alt="" />
+                <span className="visually-hidden">{item.label}</span>
+              </>
+            )
+            return (
+              <li key={item.id}>
+                {item.href ? (
+                  <a className={styles.chip} href={item.href} target="_blank" rel="noopener noreferrer">
+                    {inner}
+                  </a>
+                ) : (
+                  <span className={styles.chip} title={`${item.label} (enlace pendiente)`}>
+                    {inner}
+                  </span>
+                )}
+              </li>
+            )
+          })}
+        </ul>
       </div>
     </section>
   )

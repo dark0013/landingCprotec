@@ -1,0 +1,126 @@
+.block { background: var(--paper); }
+
+.wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: 0 0 1rem 1rem;
+  box-shadow: 0 12px 30px rgba(31, 61, 98, .08);
+}
+
+.table {
+  width: 100%;
+  min-width: 40rem;
+  border-collapse: collapse;
+  overflow: hidden;
+  background: #fff;
+}
+
+.table caption {
+  padding: .9rem 1rem;
+  color: #fff;
+  background: #00a5ae;
+  font-size: .92rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.table th,
+.table td {
+  padding: .72rem .9rem;
+  border-bottom: 1px solid rgba(255, 255, 255, .18);
+  font-size: .8rem;
+  text-align: center;
+}
+
+.table th {
+  color: #fff;
+  background: #274193;
+}
+
+.table tbody tr:nth-child(odd) th { background: #1e3a82; }
+.table tbody tr:nth-child(even) th { background: #008f97; }
+
+.table td:first-child,
+.table th:first-child {
+  position: sticky;
+  left: 0;
+  text-align: left;
+  font-weight: 700;
+}
+
+.table tbody tr:nth-child(odd) td { background: #274193; color: #fff; }
+.table tbody tr:nth-child(even) td { background: #00a5ae; color: #fff; }
+.table tbody tr:nth-child(odd) td:first-child { background: #1e3a82; }
+.table tbody tr:nth-child(even) td:first-child { background: #008f97; }
+
+.yes { font-weight: 800; color: #fff; }
+.no { font-weight: 800; color: rgba(255, 255, 255, .42); }
+
+.cta {
+  display: flex;
+  justify-content: center;
+  margin-top: 1.6rem;
+}
+
+.cta a {
+  min-height: 3rem;
+  padding: .8rem 1.4rem;
+  color: #fff;
+  background: var(--blue);
+  border-radius: 2rem;
+  text-decoration: none;
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+
+.tableTitle {
+  margin: 0;
+  color: #fff;
+  background: #00a5ae;
+  border-radius: 1rem 1rem 0 0;
+  padding: .9rem 1rem;
+  font-size: .92rem;
+  font-weight: 800;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.cards { display: none; }
+
+.card {
+  padding: 1.2rem 1.15rem 1.3rem;
+  color: #fff;
+  background: linear-gradient(135deg, #274193, #00a5ae);
+  border-radius: 1rem;
+}
+
+.card h3 {
+  margin: 0 0 .8rem;
+  font-size: 1.05rem;
+}
+
+.card ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  font-size: .82rem;
+  line-height: 1.55;
+}
+
+.card li { margin: 0 0 .35rem; }
+.out { opacity: .55; }
+
+@media (max-width: 700px) {
+  .wrap { display: none; }
+  .tableTitle {
+    border-radius: .8rem;
+    margin-bottom: 1rem;
+  }
+  .cards {
+    display: grid;
+    gap: 1rem;
+  }
+}

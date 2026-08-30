@@ -11,24 +11,21 @@ export function FloatingActions() {
     return () => window.removeEventListener('scroll', update)
   }, [])
 
+  if (!visible) return null
+
   return (
-    <aside className={styles.actions} aria-label="Acciones rápidas">
-      <button className={`${styles.action} ${styles.pending}`} type="button" aria-label="Chat: canal pendiente de configuración" title="Chat pendiente de configuración">
-        <img src="/assets/icons/chat.png" alt="" />
+    <aside className={styles.actions} aria-label="Volver arriba">
+      <button
+        className={`${styles.action} ${styles.top}`}
+        type="button"
+        aria-label="Volver al inicio"
+        onClick={() => {
+          const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+          window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' })
+        }}
+      >
+        ∧
       </button>
-      <button className={`${styles.action} ${styles.pending}`} type="button" aria-label="WhatsApp: canal pendiente de configuración" title="WhatsApp pendiente de configuración">
-        <img src="/assets/icons/whatsapp.png" alt="" />
-      </button>
-      {visible && (
-        <button
-          className={`${styles.action} ${styles.top}`}
-          type="button"
-          aria-label="Volver al inicio"
-          onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        >
-          ↑
-        </button>
-      )}
     </aside>
   )
 }

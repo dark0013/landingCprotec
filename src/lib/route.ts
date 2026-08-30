@@ -8,7 +8,7 @@ export type AppRoute =
   | { name: 'contact' }
   | { name: 'privacy' }
 
-const lineSlugs = new Set(['capacitaciones', 'soluciones', 'productos'])
+const lineSlugs = new Set(['capacitaciones', 'soluciones', 'productos', 'producciones'])
 
 export function parseHash(hash: string): AppRoute {
   const path = hash.replace(/^#/, '')
@@ -17,7 +17,7 @@ export function parseHash(hash: string): AppRoute {
   const offering = path.match(/^\/servicios\/([^/]+)$/)
   if (offering) return { name: 'offering', slug: offering[1] }
 
-  const line = path.match(/^\/(capacitaciones|soluciones|productos)$/)
+  const line = path.match(/^\/(capacitaciones|soluciones|productos|producciones)$/)
   if (line && lineSlugs.has(line[1])) return { name: 'line', slug: line[1] }
 
   if (path === '/nosotros' || path === 'nosotros') return { name: 'about' }

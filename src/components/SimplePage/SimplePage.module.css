@@ -1,4 +1,4 @@
-.page { padding-top: 5.15rem; }
+.page { padding-top: 6.6rem; }
 
 .hero {
   padding: clamp(3.3rem, 7vw, 5.5rem) 0 2.5rem;
@@ -61,6 +61,23 @@
   width: 100%;
   border-radius: .6rem;
   object-fit: cover;
+}
+
+.rail {
+  padding: 1.5rem;
+  color: #fff;
+  background: linear-gradient(180deg, #274193, #00a5ae);
+  border-radius: 1rem;
+}
+
+.rail h2 {
+  margin: 0 0 1rem;
+  color: #fff;
+}
+
+.rail p {
+  margin: 0 0 1rem;
+  color: rgba(255, 255, 255, .88);
 }
 
 @media (max-width: 800px) {

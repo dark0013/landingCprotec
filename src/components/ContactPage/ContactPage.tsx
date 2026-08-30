@@ -1,32 +1,20 @@
-import { type FormEvent, useState } from 'react'
+import { type FormEvent, useEffect, useRef, useState } from 'react'
 import { locations, team } from '../../data/site'
+import { socialChannels } from '../../data/social'
+import { submitForm, type FormResult } from '../../lib/submitForm'
 import styles from './ContactPage.module.css'
 
 export function ContactPage() {
-  const [status, setStatus] = useState('')
+  const [status, setStatus] = useState<FormResult | null>(null)
+  const formRef = useRef<HTMLFormElement>(null)
+
+  useEffect(() => {
+    if (formRef.current) formRef.current.dataset.started = String(Date.now())
+  }, [])
 
   const submit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const form = event.currentTarget
-    const data = new FormData(form)
-    try {
-      const response = await fetch('/contacto.php', { method: 'POST', body: data })
-      if (response.ok) {
-        const payload = await response.json() as { ok?: boolean }
-        if (payload.ok) {
-          setStatus('Gracias. Recibimos tu mensaje y te contactaremos pronto.')
-          form.reset()
-          return
-        }
-      }
-    } catch {
-      /* Hosting without PHP: keep a truthful fallback. */
-    }
-    const correo = String(data.get('correo') ?? '')
-    const asunto = String(data.get('asunto') || 'Consulta CPROTEC')
-    const cuerpo = `Nombre: ${data.get('nombre')} ${data.get('apellido')}\nCelular: ${data.get('celular')}\nCorreo: ${correo}\n\n${data.get('mensaje')}`
-    window.location.href = `mailto:info@cprotec.net?subject=${encodeURIComponent(asunto)}&body=${encodeURIComponent(cuerpo)}`
-    setStatus('Para finalizar tu solicitud, completa el correo dirigido a info@cprotec.net.')
+    setStatus(await submitForm(event.currentTarget))
   }
 
   return (
@@ -39,7 +27,8 @@ export function ContactPage() {
 
       <section className={`section ${styles.formSection}`}>
         <div className={`shell ${styles.formWrap}`}>
-          <form className={styles.form} onSubmit={submit}>
+          <form className={styles.form} ref={formRef} onSubmit={submit}>
+            <input className="visually-hidden" type="text" name="company_website" tabIndex={-1} autoComplete="off" />
             <label className={styles.nombre}>Nombre <span>(obligatorio)</span><input name="nombre" autoComplete="given-name" required /></label>
             <label className={styles.asunto}>Asunto <input name="asunto" /></label>
             <label className={styles.apellido}>Apellido <span>(obligatorio)</span><input name="apellido" autoComplete="family-name" required /></label>
@@ -47,7 +36,7 @@ export function ContactPage() {
             <label className={styles.celular}>Celular <span>(obligatorio)</span><input name="celular" type="tel" autoComplete="tel" required /></label>
             <label className={styles.correo}>Correo electrónico <span>(obligatorio)</span><input name="correo" type="email" autoComplete="email" required /></label>
             <button className="button" type="submit">Enviar</button>
-            {status && <p className={styles.status} role="status">{status}</p>}
+            {status && <p className={status.ok ? styles.status : styles.error} role="status">{status.message}</p>}
           </form>
         </div>
       </section>
@@ -75,10 +64,22 @@ export function ContactPage() {
 
       <section className="section">
         <div className="shell">
-          <div className={styles.social} aria-label="Redes pendientes de enlace oficial">
-            <article><img src="/assets/icons/facebook.png" alt="" /><span>Facebook</span></article>
-            <article><img src="/assets/icons/instagram.png" alt="" /><span>Instagram</span></article>
-            <article><img src="/assets/icons/whatsapp.png" alt="" /><span>WhatsApp</span></article>
+          <div className={styles.social} aria-label="Canales de CPROTEC">
+            {socialChannels.filter((item) => item.id !== 'chat').map((item) => (
+              <article key={item.id}>
+                {item.href ? (
+                  <a href={item.href} target="_blank" rel="noopener noreferrer">
+                    <img src={item.icon} alt="" />
+                    <span>{item.label}</span>
+                  </a>
+                ) : (
+                  <span title={`${item.label} (enlace pendiente)`}>
+                    <img src={item.icon} alt="" />
+                    <span>{item.label}</span>
+                  </span>
+                )}
+              </article>
+            ))}
           </div>
         </div>
       </section>

@@ -12,14 +12,15 @@ export function NewsPage() {
         <div className={`shell ${styles.news}`}>
           <article>
             <img src="/assets/lines/noticias.jpg" alt="Espacio editorial de CPROTEC" />
-            <div className="section-heading" style={{ marginTop: '1.4rem' }}>
-              <h2>Próximamente</h2>
-              <p className={styles.copy}>Las noticias institucionales se publicarán en este espacio cuando CPROTEC libere contenidos oficiales. No incluimos textos de relleno.</p>
-            </div>
+            <h2>Próximamente</h2>
+            <p className={styles.copy}>
+              Esta página usará el diseño de artículo destacado y riel lateral cuando CPROTEC publique noticias oficiales.
+              No incluimos textos de relleno.
+            </p>
           </article>
-          <aside className={styles.card}>
+          <aside className={styles.rail} aria-label="Más noticias">
             <h2>Noticias</h2>
-            <p>Este panel quedará listo para novedades, capacitaciones y comunicados oficiales.</p>
+            <p>Aún no hay comunicados publicados.</p>
           </aside>
         </div>
       </section>

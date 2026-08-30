@@ -9,6 +9,7 @@ export function LinePage({ line }: { line: Line }) {
       <section className={styles.hero} data-accent={line.accent}>
         <div className={`shell ${styles.grid}`}>
           <div>
+            <a className={styles.homeLink} href="#/">Inicio</a>
             <div className={styles.wordmark}>
               <Brand variant="white" size="hero" />
               <h1>{line.title}</h1>
@@ -19,7 +20,7 @@ export function LinePage({ line }: { line: Line }) {
             </ul>
           </div>
           <div className={styles.image}>
-            <img src={line.heroImage} alt="" />
+            <img src={line.heroImage} alt={`Imagen de ${line.title}`} />
           </div>
         </div>
       </section>
@@ -27,7 +28,7 @@ export function LinePage({ line }: { line: Line }) {
         <div className="shell">
           <div className="section-heading">
             <p className="eyebrow">{line.kicker}</p>
-            <h2>Nuestros servicios</h2>
+            <h2>{line.slug === 'productos' ? 'Nuestros productos' : 'Nuestros servicios'}</h2>
             <p>{line.description}</p>
           </div>
           <div className={styles.gridCards}>

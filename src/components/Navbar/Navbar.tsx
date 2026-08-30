@@ -1,58 +1,65 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Brand } from '../Brand/Brand'
-import { navItems } from '../../data/site'
+import { navItems, type NavItem } from '../../data/site'
 import styles from './Navbar.module.css'
+
+function isHrefCurrent(href: string, hash: string) {
+  const current = hash || '#/'
+  if (href === '#/') return current === '#' || current === '#/' || current === '' || current === '#inicio'
+  return current === href || current.startsWith(`${href}/`)
+}
+
+function isItemCurrent(item: NavItem, hash: string) {
+  if (item.children) {
+    if (item.children.some((child) => isHrefCurrent(child.href, hash))) return true
+    if (item.label === 'Servicios' && hash.startsWith('#/servicios/')) return true
+    return false
+  }
+  return item.href ? isHrefCurrent(item.href, hash) : false
+}
+
+function menuId(label: string) {
+  return `menu-${label.toLowerCase().replace(/\s+/g, '-')}`
+}
 
 export function Navbar() {
   const [open, setOpen] = useState(false)
-  const [servicesOpen, setServicesOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
-  const dropdownRef = useRef<HTMLDivElement>(null)
+  const [openMenu, setOpenMenu] = useState<string | null>(null)
+  const [hash, setHash] = useState(window.location.hash)
+  const linksRef = useRef<HTMLDivElement>(null)
 
   const closeMenus = useCallback(() => {
     setOpen(false)
-    setServicesOpen(false)
+    setOpenMenu(null)
     const active = document.activeElement
     if (active instanceof HTMLElement) active.blur()
   }, [])
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
-  useEffect(() => {
     const onHash = () => {
+      setHash(window.location.hash)
       closeMenus()
-      if (window.location.hash.startsWith('#/')) {
-        window.scrollTo(0, 0)
-        setScrolled(false)
-      } else {
-        setScrolled(window.scrollY > 24)
-      }
     }
     window.addEventListener('hashchange', onHash)
     return () => window.removeEventListener('hashchange', onHash)
   }, [closeMenus])
 
   useEffect(() => {
-    if (!servicesOpen) return
+    if (!openMenu) return
     const onPointerDown = (event: PointerEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        setServicesOpen(false)
+      if (linksRef.current && !linksRef.current.contains(event.target as Node)) {
+        setOpenMenu(null)
       }
     }
     document.addEventListener('pointerdown', onPointerDown)
     return () => document.removeEventListener('pointerdown', onPointerDown)
-  }, [servicesOpen])
+  }, [openMenu])
 
   return (
-    <header className={`${styles.navbar} ${scrolled ? styles.scrolled : ''}`}>
+    <header className={styles.navbar}>
       <nav className={`shell ${styles.inner}`} aria-label="Navegación principal">
-        <a href="#/" onClick={closeMenus}>
-          <Brand variant={scrolled ? 'color' : 'white'} />
+        <a className={styles.brand} href="#/" onClick={closeMenus}>
+          <Brand variant="white" />
         </a>
         <button
           className={styles.toggle}
@@ -62,27 +69,41 @@ export function Navbar() {
           aria-label={open ? 'Cerrar menú' : 'Abrir menú'}
           onClick={() => {
             setOpen(!open)
-            setServicesOpen(false)
+            setOpenMenu(null)
           }}
         >
           <span /><span /><span />
         </button>
-        <div className={`${styles.links} ${open ? styles.open : ''}`} id="main-menu">
+        <div className={`${styles.links} ${open ? styles.open : ''}`} id="main-menu" ref={linksRef}>
           {navItems.map((item) => {
             if (item.children) {
+              const expanded = openMenu === item.label
+              const panelId = menuId(item.label)
               return (
-                <div className={styles.dropdown} key={item.label} ref={dropdownRef}>
+                <div className={styles.dropdown} key={item.label}>
                   <button
-                    className={styles.dropToggle}
+                    className={styles.dropLink}
                     type="button"
-                    aria-expanded={servicesOpen}
-                    onClick={() => setServicesOpen(!servicesOpen)}
+                    aria-expanded={expanded}
+                    aria-controls={panelId}
+                    aria-haspopup="menu"
+                    aria-current={isItemCurrent(item, hash) ? 'page' : undefined}
+                    onClick={() => setOpenMenu(expanded ? null : item.label)}
                   >
                     {item.label}
+                    <span className={`${styles.chevron} ${expanded ? styles.chevronOpen : ''}`} aria-hidden="true">▾</span>
                   </button>
-                  <div className={`${styles.menu} ${servicesOpen ? styles.menuOpen : ''}`}>
+                  <div className={`${styles.menu} ${expanded ? styles.menuOpen : ''}`} id={panelId} role="menu">
                     {item.children.map((child) => (
-                      <a key={child.href} href={child.href} onClick={closeMenus}>{child.label}</a>
+                      <a
+                        key={child.href}
+                        href={child.href}
+                        role="menuitem"
+                        aria-current={isHrefCurrent(child.href, hash) ? 'page' : undefined}
+                        onClick={closeMenus}
+                      >
+                        {child.label}
+                      </a>
                     ))}
                   </div>
                 </div>
@@ -91,8 +112,8 @@ export function Navbar() {
             return (
               <a
                 key={item.label}
-                className={item.cta ? styles.cta : undefined}
                 href={item.href}
+                aria-current={isItemCurrent(item, hash) ? 'page' : undefined}
                 onClick={closeMenus}
               >
                 {item.label}

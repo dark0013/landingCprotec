@@ -1,3 +1,4 @@
+import { HomePlatform } from '../home/HomePlatform'
 import styles from './SimplePage.module.css'
 
 export function PlatformPage() {
@@ -11,12 +12,12 @@ export function PlatformPage() {
       <section className={`section ${styles.body}`}>
         <div className="shell">
           <p className={styles.copy}>
-            La plataforma educativa de CPROTEC se habilitará cuando exista el acceso oficial.
-            Mientras tanto, puedes escribirnos para conocer las capacitaciones disponibles.
+            El acceso al campus en línea se habilitará cuando CPROTEC publique la URL oficial.
+            El programa de formación ya publicado es el siguiente.
           </p>
-          <p><a className="button" href="#/contacto">Contáctanos</a></p>
         </div>
       </section>
+      <HomePlatform showHeading={false} showCta={false} />
     </main>
   )
 }

@@ -22,7 +22,7 @@ export const lines: Line[] = [
     title: 'Producciones Digitales',
     kicker: 'CPROTEC',
     description: 'Diseño, marketing y producción audiovisual para marcas que necesitan presencia, alcance y recuerdos duraderos.',
-    heroImage: '/assets/hero.jpg',
+    heroImage: '/assets/lines/producciones-hero.jpg',
     accent: 'red',
     offerings: [
       {
@@ -164,8 +164,6 @@ export const lines: Line[] = [
   },
 ]
 
-export const homeLine = lines[0]
-
 export const allOfferings: Offering[] = lines.flatMap((line) => line.offerings)
 
 export function findOffering(slug: string) {
@@ -173,5 +171,15 @@ export function findOffering(slug: string) {
 }
 
 export function findLine(slug: string) {
+  if (slug === 'producciones') return lines.find((item) => item.slug === 'producciones-digitales')
   return lines.find((item) => item.slug === slug)
+}
+
+export function lineHref(slug: string) {
+  if (slug === 'producciones-digitales' || slug === 'producciones') return '#/producciones'
+  return `#/${slug}`
+}
+
+export function findLineForOffering(slug: string) {
+  return lines.find((line) => line.offerings.some((item) => item.slug === slug))
 }

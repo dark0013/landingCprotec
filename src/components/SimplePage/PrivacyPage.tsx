@@ -14,6 +14,10 @@ export function PrivacyPage() {
           {privacyText.map((paragraph) => (
             <p className={styles.copy} key={paragraph.slice(0, 24)}>{paragraph}</p>
           ))}
+          <p className={styles.copy}>
+            El formulario de este sitio solicita nombre, apellido, celular, correo electrónico, mensaje y, en cotizaciones, el plan elegido.
+            El detalle legal ampliado (responsable del tratamiento, plazos y finalidades) se publicará cuando CPROTEC lo entregue.
+          </p>
         </div>
       </section>
     </main>

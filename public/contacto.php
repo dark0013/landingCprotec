@@ -7,11 +7,17 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
   exit;
 }
 
+if (trim((string) ($_POST['company_website'] ?? '')) !== '') {
+  echo json_encode(['ok' => true]);
+  exit;
+}
+
 $nombre = trim((string) ($_POST['nombre'] ?? ''));
 $apellido = trim((string) ($_POST['apellido'] ?? ''));
 $celular = trim((string) ($_POST['celular'] ?? ''));
 $correo = trim((string) ($_POST['correo'] ?? ''));
 $asunto = trim((string) ($_POST['asunto'] ?? 'Consulta desde cprotec.net'));
+$plan = trim((string) ($_POST['plan'] ?? ''));
 $mensaje = trim((string) ($_POST['mensaje'] ?? ''));
 
 if ($nombre === '' || $apellido === '' || $celular === '' || $correo === '' || $mensaje === '') {
@@ -26,7 +32,11 @@ if (!filter_var($correo, FILTER_VALIDATE_EMAIL)) {
   exit;
 }
 
-$body = "Nombre: {$nombre} {$apellido}\nCelular: {$celular}\nCorreo: {$correo}\n\n{$mensaje}\n";
+$planLine = $plan !== '' ? "Plan: {$plan}\n" : '';
+$body = "Nombre: {$nombre} {$apellido}\nCelular: {$celular}\nCorreo: {$correo}\n{$planLine}\n{$mensaje}\n";
+if ($plan !== '' && $asunto === 'Consulta desde cprotec.net') {
+  $asunto = 'Cotización web: ' . $plan;
+}
 $headers = [
   'From: info@cprotec.net',
   'Reply-To: ' . $correo,

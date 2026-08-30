@@ -1,4 +1,15 @@
-.page { padding-top: 5.15rem; }
+.page { padding-top: 6.6rem; }
+
+.homeLink {
+  display: inline-block;
+  margin-bottom: 1.1rem;
+  color: inherit;
+  font-size: .75rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.homeLink:hover { text-decoration: underline; }
 
 .hero {
   padding: clamp(3.5rem, 7vw, 6.2rem) 0;

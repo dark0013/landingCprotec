@@ -34,8 +34,6 @@
   font-weight: 700;
 }
 
-.pending { cursor: help; }
-
 @media (max-width: 590px) {
   .actions { right: .7rem; bottom: .7rem; }
   .action { width: 2.7rem; height: 2.7rem; }

@@ -1,29 +1,51 @@
 import { Brand } from '../Brand/Brand'
 import { company, locations, payments, privacyText } from '../../data/site'
+import { socialChannels } from '../../data/social'
 import styles from './Footer.module.css'
 
 export function Footer() {
   return (
-    <footer className={styles.footer} id="contacto">
+    <footer className={styles.footer}>
       <div className="shell">
+        <div className={styles.top}>
+          <Brand variant="white" size="footer" />
+          <button
+            className={styles.toTop}
+            type="button"
+            aria-label="Volver al inicio"
+            onClick={() => {
+              const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+              window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' })
+            }}
+          >
+            ∧
+          </button>
+        </div>
         <div className={styles.grid}>
-          <div className={styles.intro}>
-            <Brand variant="white" size="footer" />
-            <p>Producciones digitales, capacitaciones y soluciones tecnológicas para proyectos que buscan conectar, comunicar y crecer.</p>
-          </div>
           <address>
             <h2>Contáctanos</h2>
             {locations.map((location) => (
               <p key={location.city}>
-                <strong>{location.city}</strong><br />
-                {location.address}
+                <strong>{location.city}:</strong> {location.address}
               </p>
             ))}
             <ul className={styles.channels}>
               <li><a href={`mailto:${company.email}`}>{company.email}</a></li>
-              <li>Facebook</li>
-              <li>Instagram</li>
-              <li>WhatsApp</li>
+              {socialChannels.filter((item) => item.id !== 'chat').map((item) => (
+                <li key={item.id}>
+                  {item.href ? (
+                    <a className={styles.channel} href={item.href} target="_blank" rel="noopener noreferrer">
+                      <img src={item.icon} alt="" />
+                      {item.label}
+                    </a>
+                  ) : (
+                    <span className={styles.channel} title={`${item.label} (enlace pendiente)`}>
+                      <img src={item.icon} alt="" />
+                      {item.label}
+                    </span>
+                  )}
+                </li>
+              ))}
             </ul>
           </address>
           <div className={styles.privacy}>
@@ -39,7 +61,7 @@ export function Footer() {
               <img key={item.alt} src={item.src} alt={item.alt} />
             ))}
           </div>
-          <p>Todos los derechos reservados — CPROTEC ©</p>
+          <p>Derechos reservados para CPROTEC ©</p>
         </div>
       </div>
     </footer>

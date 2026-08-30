@@ -1,4 +1,4 @@
-.page { padding-top: 5.15rem; }
+.page { padding-top: 6.6rem; }
 
 .hero {
   padding: clamp(3.3rem, 7vw, 6rem) 0;
@@ -78,13 +78,16 @@
   border-color: var(--blue-dark);
 }
 
-.status {
+.status,
+.error {
   grid-column: 1 / -1;
   margin: 0;
-  color: #e8fff6;
   font-size: .8rem;
   line-height: 1.5;
 }
+
+.status { color: #e8fff6; }
+.error { color: #ffe1e4; }
 
 .locations {
   background: #fff;
@@ -134,11 +137,17 @@
 }
 
 .social article {
+  color: var(--blue);
+  font-weight: 800;
+}
+
+.social article > a,
+.social article > span {
   display: grid;
   gap: .7rem;
   place-items: center;
-  color: var(--blue);
-  font-weight: 800;
+  color: inherit;
+  text-decoration: none;
 }
 
 .social img { width: 3.2rem; height: 3.2rem; object-fit: contain; }

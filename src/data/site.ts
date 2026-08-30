@@ -10,12 +10,12 @@ export const locations = [
   {
     city: 'Portoviejo',
     address: 'Calle 5 de Octubre y Av. del Ejército.',
-    query: 'Calle 5 de Octubre y Av. del Ejército, Portoviejo, Ecuador',
+    query: 'Calle 5 de Octubre y Avenida del Ejército, Portoviejo, Manabí, Ecuador',
   },
   {
     city: 'Guayaquil',
     address: 'Av. Francisco de Orellana, Sky Building',
-    query: 'Sky Building, Av. Francisco de Orellana, Guayaquil, Ecuador',
+    query: 'Sky Building, Avenida Francisco de Orellana, Guayaquil, Guayas, Ecuador',
   },
 ]
 
@@ -48,11 +48,15 @@ export const payments = [
   { src: '/assets/payments/amex.svg', alt: 'American Express' },
 ]
 
-export type NavItem = {
+export type NavChild = {
   label: string
   href: string
-  cta?: boolean
-  children?: { label: string; href: string }[]
+}
+
+export type NavItem = {
+  label: string
+  href?: string
+  children?: NavChild[]
 }
 
 export const navItems: NavItem[] = [
@@ -60,15 +64,19 @@ export const navItems: NavItem[] = [
   { label: 'Nosotros', href: '#/nosotros' },
   {
     label: 'Servicios',
-    href: '#/servicios',
     children: [
-      { label: 'Producciones Digitales', href: '#/' },
+      { label: 'Producciones Digitales', href: '#/producciones' },
       { label: 'Capacitaciones', href: '#/capacitaciones' },
       { label: 'Soluciones Tecnológicas', href: '#/soluciones' },
       { label: 'Productos Tecnológicos', href: '#/productos' },
     ],
   },
-  { label: 'Plataforma Educativa', href: '#/plataforma' },
+  {
+    label: 'Plataforma Educativa',
+    children: [
+      { label: 'Accede a plataforma educativa', href: '#/plataforma' },
+    ],
+  },
   { label: 'Noticias', href: '#/noticias' },
-  { label: 'Contáctanos', href: '#/contacto', cta: true },
+  { label: 'Contáctanos', href: '#/contacto' },
 ]

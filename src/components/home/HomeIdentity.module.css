@@ -1,0 +1,123 @@
+.block { background: #fff; }
+
+.purpose {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  padding: clamp(2.2rem, 5vw, 3.4rem) clamp(1.6rem, 4vw, 3rem);
+  color: #fff;
+  background: linear-gradient(120deg, #5b73c4 0%, #274193 42%, #00a5ae 100%);
+  border-radius: 1.4rem;
+}
+
+.purpose article { text-align: center; }
+
+.purpose img {
+  width: 4.2rem;
+  height: 4.2rem;
+  margin: 0 auto .85rem;
+  object-fit: contain;
+}
+
+.purpose h3 { margin: 0 0 .8rem; font-size: 1.45rem; }
+
+.purpose p {
+  margin: 0 auto;
+  max-width: 36ch;
+  color: rgba(255, 255, 255, .92);
+  font-size: .88rem;
+  line-height: 1.7;
+}
+
+.values {
+  display: grid;
+  grid-template-columns: minmax(14rem, .78fr) 1.22fr;
+  margin-top: 2.2rem;
+  align-items: stretch;
+}
+
+.diamond {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  margin-right: -3.4rem;
+  padding: 2.4rem 1.4rem;
+  color: #fff;
+  background: linear-gradient(180deg, #7f94d8, #274193 45%, #00a5ae);
+  border-radius: 1.3rem;
+  box-shadow: 10px 0 28px rgba(12, 28, 72, .22);
+}
+
+.diamond img {
+  width: min(11rem, 70%);
+  margin-bottom: 1rem;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.diamond h3 { margin: 0; font-size: 1.6rem; }
+
+.list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.3rem 1.8rem;
+  margin: 0;
+  padding: clamp(1.6rem, 4vw, 2.4rem) clamp(1.6rem, 4vw, 2.4rem) clamp(1.6rem, 4vw, 2.4rem) 4.2rem;
+  list-style: none;
+  color: #fff;
+  background: #274193;
+  border-radius: 1.3rem;
+}
+
+.list li {
+  margin: 0;
+  padding-left: .9rem;
+  font-size: .88rem;
+  line-height: 1.65;
+}
+
+.list li::before {
+  content: '•';
+  display: inline-block;
+  width: .8rem;
+  margin-left: -.9rem;
+}
+
+.wide { grid-column: 1 / -1; }
+
+.partner {
+  margin-top: 3.2rem;
+  text-align: center;
+}
+
+.partner h2 { margin-bottom: 1.2rem; }
+
+.strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 1.2rem 1.6rem;
+  padding: 1.3rem 1.6rem;
+  background: linear-gradient(90deg, #274193, #00a5ae);
+  border-radius: 1.2rem;
+}
+
+.strip img {
+  height: 2.6rem;
+  max-width: 9.5rem;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+@media (max-width: 800px) {
+  .purpose,
+  .values,
+  .list { grid-template-columns: 1fr; }
+  .diamond { margin-right: 0; }
+  .diamond,
+  .list { border-radius: 1.2rem; }
+  .list { padding-left: clamp(1.6rem, 4vw, 2.4rem); }
+  .wide { grid-column: auto; }
+}

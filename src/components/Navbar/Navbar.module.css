@@ -7,36 +7,32 @@
   color: #fff;
   background: var(--nav);
   box-shadow: 0 2px 12px rgba(12, 28, 72, .18);
-  transition: background .25s ease, box-shadow .25s ease, color .25s ease;
-}
-
-.scrolled {
-  color: var(--ink);
-  background: rgba(255, 255, 255, .97);
-  box-shadow: 0 4px 22px rgba(14, 42, 76, .12);
-  backdrop-filter: blur(12px);
 }
 
 .inner {
   display: flex;
-  min-height: 5.15rem;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  padding: .7rem 0 .9rem;
+  gap: .55rem;
 }
+
+.brand { line-height: 0; }
 
 .links {
   display: flex;
   align-items: center;
-  gap: clamp(.7rem, 1.5vw, 1.45rem);
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: clamp(.75rem, 1.6vw, 1.55rem);
   font-size: .74rem;
   font-weight: 700;
   letter-spacing: .04em;
   text-transform: uppercase;
 }
 
-.links > a,
-.dropToggle {
+.links a,
+.dropLink {
   position: relative;
   color: inherit;
   text-decoration: none;
@@ -46,46 +42,42 @@
   font: inherit;
   letter-spacing: inherit;
   text-transform: inherit;
+  cursor: pointer;
 }
 
-.links > a:not(.cta)::after,
-.dropToggle::after {
+.links a[aria-current='page']::after,
+.dropLink[aria-current='page']::after {
   position: absolute;
   right: 0;
-  bottom: -.45rem;
+  bottom: -.4rem;
   left: 0;
   height: 2px;
   content: '';
   background: currentColor;
-  transform: scaleX(0);
+}
+
+.dropdown { position: relative; }
+
+.dropLink {
+  display: inline-flex;
+  align-items: center;
+  gap: .28rem;
+}
+
+.chevron {
+  display: inline-block;
+  font-size: .8em;
+  line-height: 1;
   transition: transform .2s;
 }
 
-.links > a:hover::after,
-.dropToggle:hover::after {
-  transform: scaleX(1);
-}
-
-.cta {
-  padding: .55rem .9rem;
-  border: 2px solid currentColor;
-  border-radius: .32rem;
-}
-
-.scrolled .cta {
-  color: #fff;
-  background: var(--red);
-  border-color: var(--red);
-}
-
-.dropdown {
-  position: relative;
-}
+.chevronOpen { transform: rotate(180deg); }
 
 .menu {
   position: absolute;
+  z-index: 4;
   top: calc(100% + .85rem);
-  left: 0;
+  left: 50%;
   display: grid;
   min-width: 15.5rem;
   padding: .45rem;
@@ -96,14 +88,14 @@
   box-shadow: 0 16px 30px rgba(3, 31, 64, .16);
   opacity: 0;
   pointer-events: none;
-  transform: translateY(-.4rem);
+  transform: translate(-50%, -.4rem);
   transition: opacity .2s, transform .2s;
 }
 
 .menuOpen {
   opacity: 1;
   pointer-events: auto;
-  transform: none;
+  transform: translate(-50%, 0);
 }
 
 .menu a {
@@ -112,9 +104,12 @@
   text-decoration: none;
   border-radius: .35rem;
   font-size: .72rem;
+  text-transform: none;
+  letter-spacing: 0;
 }
 
-.menu a:hover { background: var(--blue-light); }
+.menu a:hover,
+.menu a[aria-current='page'] { background: var(--blue-light); }
 
 .toggle {
   display: none;
@@ -133,6 +128,14 @@
 }
 
 @media (max-width: 980px) {
+  .inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    min-height: 4.6rem;
+    padding: 0;
+  }
+
   .toggle { display: block; }
 
   .links {
@@ -141,6 +144,7 @@
     right: 1rem;
     left: 1rem;
     display: grid;
+    justify-content: stretch;
     gap: 0;
     padding: .6rem;
     background: #fff;
@@ -162,19 +166,22 @@
     overflow: auto;
   }
 
-  .links > a,
-  .dropToggle {
+  .links a,
+  .dropLink {
     padding: .85rem .7rem;
     text-align: left;
+    width: 100%;
+    justify-content: space-between;
   }
 
-  .links > a::after,
-  .dropToggle::after { display: none; }
+  .links a[aria-current='page']::after,
+  .dropLink[aria-current='page']::after { display: none; }
 
   .dropdown .menu,
   .menu {
     position: static;
     min-width: 0;
+    left: auto;
     box-shadow: none;
     border: 0;
     background: var(--paper);
@@ -194,18 +201,4 @@
     overflow: auto;
     padding: .2rem .4rem .5rem;
   }
-
-  .cta {
-    display: inline-flex;
-    width: calc(100% - .4rem);
-    margin: .5rem .2rem .35rem;
-    justify-self: stretch;
-    color: #fff !important;
-    background: #e02a37 !important;
-    border-color: #e02a37 !important;
-  }
-}
-
-@media (max-width: 590px) {
-  .inner { min-height: 4.45rem; }
 }
