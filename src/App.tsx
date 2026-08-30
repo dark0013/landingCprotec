@@ -1,17 +1,45 @@
-import { FloatingActions } from './components/FloatingActions'
-import { Footer } from './components/Footer'
-import { Hero } from './components/Hero'
-import { Navbar } from './components/Navbar'
-import { Services } from './components/Services'
-import { ServicePage } from './components/ServicePage'
-import { services } from './data/services'
+import { useEffect, useState } from 'react'
+import { Layout } from './components/Layout/Layout'
+import { AboutPage } from './components/SimplePage/AboutPage'
+import { ContactPage } from './components/ContactPage/ContactPage'
+import { LinePage } from './components/LinePage/LinePage'
+import { NewsPage } from './components/SimplePage/NewsPage'
+import { OfferingPage } from './components/OfferingPage/OfferingPage'
+import { PlatformPage } from './components/SimplePage/PlatformPage'
+import { PrivacyPage } from './components/SimplePage/PrivacyPage'
+import { findLine, findOffering } from './data/catalog'
+import { parseHash } from './lib/route'
+import { HomePage } from './pages/HomePage'
 
 export default function App() {
-  const [route, setRoute] = useState(window.location.hash)
-  useEffect(() => { const onHashChange = () => setRoute(window.location.hash); window.addEventListener('hashchange', onHashChange); return () => window.removeEventListener('hashchange', onHashChange) }, [])
-  const slug = route.match(/^#\/servicios\/([^/]+)$/)?.[1]
-  const service = services.find((item) => item.slug === slug)
-  if (service) return <><a className="skip-link" href="#contenido">Saltar al contenido principal</a><Navbar variant="service" /><ServicePage service={service} /><Footer /><FloatingActions /></>
-  return <><a className="skip-link" href="#contenido">Saltar al contenido principal</a><Navbar /><main id="contenido"><Hero /><Services /></main><Footer /><FloatingActions /></>
+  const [hash, setHash] = useState(window.location.hash)
+
+  useEffect(() => {
+    const onHashChange = () => setHash(window.location.hash)
+    window.addEventListener('hashchange', onHashChange)
+    return () => window.removeEventListener('hashchange', onHashChange)
+  }, [])
+
+  const route = parseHash(hash)
+
+  useEffect(() => {
+    if (hash.startsWith('#/')) window.scrollTo(0, 0)
+  }, [hash])
+
+  let page = <HomePage />
+  if (route.name === 'contact') page = <ContactPage />
+  if (route.name === 'about') page = <AboutPage />
+  if (route.name === 'news') page = <NewsPage />
+  if (route.name === 'platform') page = <PlatformPage />
+  if (route.name === 'privacy') page = <PrivacyPage />
+  if (route.name === 'line') {
+    const line = findLine(route.slug)
+    page = line ? <LinePage line={line} /> : <HomePage />
+  }
+  if (route.name === 'offering') {
+    const offering = findOffering(route.slug)
+    page = offering ? <OfferingPage offering={offering} /> : <HomePage />
+  }
+
+  return <Layout>{page}</Layout>
 }
-import { useEffect, useState } from 'react'

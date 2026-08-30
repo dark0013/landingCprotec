@@ -1,0 +1,42 @@
+.actions {
+  position: fixed;
+  z-index: 20;
+  right: 1rem;
+  bottom: 1rem;
+  display: grid;
+  gap: .6rem;
+}
+
+.action {
+  display: grid;
+  width: 3rem;
+  height: 3rem;
+  padding: .55rem;
+  place-items: center;
+  background: #fff;
+  border: 0;
+  border-radius: 50%;
+  box-shadow: 0 7px 18px rgba(2, 36, 74, .2);
+  transition: transform .2s;
+}
+
+.action:hover { transform: translateY(-3px); }
+
+.action img {
+  max-height: 1.8rem;
+  object-fit: contain;
+}
+
+.top {
+  color: #fff;
+  background: var(--blue);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.pending { cursor: help; }
+
+@media (max-width: 590px) {
+  .actions { right: .7rem; bottom: .7rem; }
+  .action { width: 2.7rem; height: 2.7rem; }
+}

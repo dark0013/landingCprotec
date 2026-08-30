@@ -1,0 +1,125 @@
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+}
+
+body, button, a { font-family: inherit; }
+
+a { color: inherit; }
+
+img { display: block; max-width: 100%; }
+
+button { cursor: pointer; }
+
+:focus-visible {
+  outline: 3px solid #e02a37;
+  outline-offset: 3px;
+}
+
+.shell {
+  width: min(100% - 2.5rem, 1240px);
+  margin-inline: auto;
+}
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: .75rem;
+  left: .75rem;
+  padding: .75rem 1rem;
+  color: #fff;
+  background: var(--blue-dark);
+  transform: translateY(-200%);
+  transition: transform .2s;
+}
+
+.skip-link:focus { transform: translateY(0); }
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .55rem;
+  min-height: 2.85rem;
+  padding: .7rem 1.25rem;
+  color: #fff;
+  background: var(--red);
+  border: 2px solid var(--red);
+  border-radius: .38rem;
+  text-decoration: none;
+  font-size: .74rem;
+  font-weight: 800;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  transition: transform .2s, background .2s, box-shadow .2s, color .2s;
+}
+
+.button:hover {
+  color: var(--red);
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .15);
+  transform: translateY(-2px);
+}
+
+.button--primary {
+  min-height: 3.1rem;
+  padding-inline: 1.45rem;
+}
+
+.button--primary span { font-size: 1.25rem; line-height: 0; }
+
+.button--light {
+  color: var(--blue);
+  background: #fff;
+  border-color: #fff;
+}
+
+.button--light:hover {
+  color: #fff;
+  background: transparent;
+}
+
+.eyebrow {
+  margin: 0 0 .8rem;
+  color: var(--red);
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+}
+
+.section { padding: clamp(4.5rem, 9vw, 7.5rem) 0; }
+
+.section-heading { max-width: 43rem; margin-bottom: 2.5rem; }
+
+.section-heading h2 {
+  margin: 0;
+  color: var(--blue-dark);
+  font-size: clamp(2rem, 4vw, 3.35rem);
+  line-height: 1;
+  letter-spacing: -.05em;
+  text-transform: uppercase;
+}
+
+.section-heading > p:last-child {
+  margin: 1rem 0 0;
+  color: var(--muted);
+  line-height: 1.7;
+}
+
+@media (max-width: 590px) {
+  .shell { width: min(100% - 2rem, 1240px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+  }
+}

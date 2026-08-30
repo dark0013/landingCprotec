@@ -35,6 +35,7 @@ React, React DOM, Vite, TypeScript, Tailwind CSS con `@tailwindcss/vite`, y ESLi
 - Navegación por anclas y CTA.
 - Tres páginas de servicio accesibles desde cada tarjeta: Diseño Gráfico Publicitario, Marketing y publicidad, y Servicios audiovisuales para eventos sociales.
 - Rutas estáticas compatibles con cPanel mediante hash: `#/servicios/diseno-grafico-publicitario`, `#/servicios/marketing-y-publicidad` y `#/servicios/servicios-audiovisuales`.
+- Página de contacto en `#/contacto`, basada en la maqueta CONTACTO: formulario, ubicaciones, enlaces a mapas y contactos directos de las áreas tecnológica y comercial.
 - Menú móvil con `aria-expanded`, cierre al elegir un enlace y foco visible.
 - Hero y servicios responsive.
 - Botón de volver al inicio visible después de desplazarse.
@@ -69,6 +70,7 @@ El workspace inicial no contenía proyecto, `package.json`, configuración ni `s
 
 - El logo oficial únicamente está disponible en archivos AI/PDF. Se usó una marca textual temporal, sin crear un logo alternativo. Conviene exportar y sustituirla por el logo oficial en SVG o PNG web.
 - Configurar URLs oficiales de Facebook, Instagram, WhatsApp y el proveedor de chat. Por ello los controles correspondientes no simulan enlaces funcionales.
+- Conectar el formulario de contacto a un endpoint PHP, servicio de correo o CRM. Actualmente confirma la interacción y deriva al correo corporativo, para evitar simular un envío que no existe.
 - Sustituir el favicon temporal por el oficial cuando se entregue un recurso web.
 - Las anclas de futuras páginas (Nosotros, Plataforma Educativa y Noticias) están preparadas en navegación, pero sus secciones aún no forman parte de esta landing solicitada.
 

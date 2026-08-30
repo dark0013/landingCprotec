@@ -1,0 +1,23 @@
+.brand {
+  display: inline-flex;
+  align-items: center;
+  line-height: 0;
+}
+
+.image {
+  display: block;
+  width: auto;
+  height: 2.55rem;
+}
+
+.hero {
+  height: clamp(4.4rem, 8vw, 6.4rem);
+}
+
+.footer {
+  height: 2.9rem;
+}
+
+.stacked {
+  height: 6.8rem;
+}

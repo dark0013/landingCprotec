@@ -1,0 +1,200 @@
+.page { padding-top: 5.15rem; }
+
+.hero {
+  padding: clamp(3.3rem, 7vw, 6rem) 0;
+  color: #fff;
+  background: var(--nav);
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2.6rem, 5vw, 4.2rem);
+  line-height: 1;
+  letter-spacing: -.06em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.formSection { background: var(--paper); }
+
+.formWrap {
+  max-width: 58rem;
+  margin: 0 auto;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    'nombre asunto'
+    'apellido mensaje'
+    'celular mensaje'
+    'correo submit';
+  gap: 1rem 1.4rem;
+  padding: clamp(1.5rem, 4vw, 2.6rem);
+  color: #fff;
+  background: linear-gradient(135deg, #274193, #00a5ae);
+  border-radius: 1.1rem;
+}
+
+.form label {
+  display: grid;
+  gap: .45rem;
+  font-size: .73rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.form label span { opacity: .8; }
+
+.form input,
+.form textarea {
+  width: 100%;
+  padding: .75rem .8rem;
+  color: var(--ink);
+  background: #e9eef5;
+  border: 0;
+  border-radius: .2rem;
+  font: inherit;
+  font-size: .88rem;
+  font-weight: 400;
+  text-transform: none;
+}
+
+.form textarea { resize: vertical; min-height: 8rem; }
+
+.nombre { grid-area: nombre; }
+.asunto { grid-area: asunto; }
+.apellido { grid-area: apellido; }
+.mensaje { grid-area: mensaje; }
+.celular { grid-area: celular; }
+.correo { grid-area: correo; }
+
+.form button {
+  grid-area: submit;
+  justify-self: end;
+  align-self: end;
+  background: var(--blue-dark);
+  border-color: var(--blue-dark);
+}
+
+.status {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: #e8fff6;
+  font-size: .8rem;
+  line-height: 1.5;
+}
+
+.locations {
+  background: #fff;
+}
+
+.locationBox {
+  padding: clamp(1.4rem, 3vw, 2.2rem);
+  color: #fff;
+  background: linear-gradient(135deg, #274193, #00a5ae);
+  border-radius: 1.1rem;
+}
+
+.locationBox h2 {
+  margin: 0 0 1.4rem;
+  text-align: center;
+  letter-spacing: -.04em;
+  text-transform: uppercase;
+}
+
+.maps {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+}
+
+.maps article h3 { margin: 0 0 .35rem; }
+
+.maps p {
+  margin: 0 0 .9rem;
+  color: #e4f9fc;
+  font-size: .84rem;
+}
+
+.maps iframe {
+  width: 100%;
+  height: 14rem;
+  border: 0;
+  border-radius: .4rem;
+  background: #dbe8f2;
+}
+
+.social {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  text-align: center;
+}
+
+.social article {
+  display: grid;
+  gap: .7rem;
+  place-items: center;
+  color: var(--blue);
+  font-weight: 800;
+}
+
+.social img { width: 3.2rem; height: 3.2rem; object-fit: contain; }
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.4rem;
+}
+
+.teamGrid article {
+  overflow: hidden;
+  background: #fff;
+  border-radius: .5rem;
+  box-shadow: 0 9px 22px rgba(31, 61, 98, .08);
+}
+
+.teamGrid h3 {
+  margin: 0;
+  color: #fff;
+  font-size: 1.05rem;
+}
+
+.photo {
+  min-height: 12rem;
+  background: #d7dee8;
+}
+
+.meta {
+  padding: 1rem 1.1rem 1.2rem;
+  background: linear-gradient(90deg, #274193, #00a5ae);
+}
+
+.meta p,
+.meta a {
+  margin: .35rem 0 0;
+  color: #fff;
+  font-size: .8rem;
+  text-decoration: none;
+}
+
+@media (max-width: 700px) {
+  .page { padding-top: 4.45rem; }
+  .form {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      'nombre'
+      'apellido'
+      'celular'
+      'correo'
+      'asunto'
+      'mensaje'
+      'submit';
+  }
+  .maps,
+  .teamGrid,
+  .social { grid-template-columns: 1fr; }
+  .form button { justify-self: start; }
+}
